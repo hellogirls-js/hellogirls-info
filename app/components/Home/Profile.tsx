@@ -196,7 +196,12 @@ export default function Profile({
           </p>
           <p>
             i also have a very cute cat named{" "}
-            <Link to="/cat" style={{ textDecoration: "underline" }} rel="noreferrer" target="_blank">
+            <Link
+              to="/cat"
+              style={{ textDecoration: "underline" }}
+              rel="noreferrer"
+              target="_blank"
+            >
               <Strong>moo moo</Strong>
             </Link>
             ! i love her dearly and will talk about her sometimes.

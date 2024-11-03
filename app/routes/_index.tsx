@@ -20,7 +20,8 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  return json({ birthday: context.cloudflare.env.BIRTHDAY });
+  console.log("birthday: ", context.cloudflare.env.BIRTHDAY);
+  return json({ BIRTHDAY: context.cloudflare.env.BIRTHDAY });
 }
 
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
@@ -37,6 +38,10 @@ export default function Index() {
   const env = useLoaderData<typeof clientLoader>();
   const birthday = React.useRef((env as Env).BIRTHDAY ?? "");
   const { colorTheme } = React.useContext(DarkModeContext);
+
+  React.useEffect(() => {
+    if (env.BIRTHDAY?.length) birthday.current = env.BIRTHDAY;
+  }, [env]);
 
   return (
     <MainLayout heading="welcome!">
