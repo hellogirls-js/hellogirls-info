@@ -33,7 +33,7 @@ import {
 import OverallResults from "@/components/FanQuiz/OverallResults";
 
 import { shuffleArray } from "@/utilities";
-import { json } from "@remix-run/node";
+import { json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { createBrowserClient } from "@supabase/ssr";
 import { QuizHeader } from "@/components/FanQuiz/QuizHeader";

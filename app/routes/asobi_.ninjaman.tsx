@@ -8,7 +8,7 @@ import NinjamanGame from "@/components/Asobi/Ninjaman/NinjamanGame";
 
 import AsobiLayout from "@/layouts/AsobiLayout";
 import { getRandomIndexFromArray } from "@/utilities";
-import { json } from "@remix-run/node";
+import { json } from "@remix-run/cloudflare";
 import { useLoaderData, useRevalidator } from "@remix-run/react";
 import NinjamanGameLoading from "@/components/Asobi/Ninjaman/NinjamanLoading";
 
@@ -16,13 +16,15 @@ export async function loader() {
   const phraseOptions = ["name", "song"];
   const randomPhraseOptionIndex = getRandomIndexFromArray(phraseOptions);
   const randomPhraseOption = phraseOptions[randomPhraseOptionIndex];
-  const promptData = await fetch(`https://assets.hellogirls.info/asobi/ninjaman/${randomPhraseOption}s.txt`);
+  const promptData = await fetch(
+    `https://assets.hellogirls.info/asobi/ninjaman/${randomPhraseOption}s.txt`,
+  );
   const promptOptionsGroup = await promptData.text();
   const promptOptions = promptOptionsGroup.split("\n");
   const randomPromptOptionIndex = getRandomIndexFromArray(promptOptions);
   const randomPrompt = promptOptions[randomPromptOptionIndex];
 
-  return json({type: randomPhraseOption, phrase: randomPrompt});
+  return json({ type: randomPhraseOption, phrase: randomPrompt });
 }
 
 export default function Ninjaman() {
@@ -34,14 +36,20 @@ export default function Ninjaman() {
     <AsobiLayout title="Ninjaman">
       <div className={styles.ninjamanContainer}>
         {currentPage === "home" && (
-          <NinjamanHome setCurrentPage={setCurrentPage} {...{data, revalidator}} />
+          <NinjamanHome
+            setCurrentPage={setCurrentPage}
+            {...{ data, revalidator }}
+          />
         )}
         {currentPage === "instructions" && (
           <NinjamanInstructions setCurrentPage={setCurrentPage} />
         )}
-        {currentPage === "game" && (<Suspense fallback={<NinjamanGameLoading />}><NinjamanGame {...{data, revalidator}} /></Suspense>)}
+        {currentPage === "game" && (
+          <Suspense fallback={<NinjamanGameLoading />}>
+            <NinjamanGame {...{ data, revalidator }} />
+          </Suspense>
+        )}
       </div>
     </AsobiLayout>
   );
 }
-

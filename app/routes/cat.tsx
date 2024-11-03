@@ -6,7 +6,7 @@ import styles from "@/styles/Cat.module.scss";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import MainLayout from "@/layouts/MainLayout";
 import { Link } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/cloudflare";
 
 const MOOMOO_DAY = "2018-10-20";
 

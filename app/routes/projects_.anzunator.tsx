@@ -9,7 +9,7 @@ import Content from "@/components/Anzunator/Content";
 import styles from "@/styles/Anzunator.module.scss";
 import { ANZU_REGULAR } from "@/utilities/anzunator";
 import { json, Link, useLoaderData } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = () => {
   return [

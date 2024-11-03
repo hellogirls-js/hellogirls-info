@@ -1,11 +1,15 @@
 import AsobiLayout from "@/layouts/AsobiLayout";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/cloudflare";
 import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "ASOBI! ♡ hellogirls.info" },
-    { name: "son", content: "ASOBI! is a collection of games inspired by the Asobi circle in Ensemble Stars." },
+    {
+      name: "son",
+      content:
+        "ASOBI! is a collection of games inspired by the Asobi circle in Ensemble Stars.",
+    },
   ];
 };
 

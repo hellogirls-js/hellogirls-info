@@ -5,7 +5,7 @@ import styles from "@/styles/Projects.module.scss";
 import MainLayout from "@/layouts/MainLayout";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { Link } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/cloudflare";
 
 interface ProjectObject {
   title: string;

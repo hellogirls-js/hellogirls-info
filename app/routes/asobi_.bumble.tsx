@@ -15,7 +15,7 @@ import GameFooter from "@/components/Asobi/Bumble/GameFooter";
 import GameHeader from "@/components/Asobi/Bumble/GameHeader";
 import MatchScreen from "@/components/Asobi/Bumble/MatchScreen";
 import { createBrowserClient } from "@supabase/ssr";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = () => {
   return [

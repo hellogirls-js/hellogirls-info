@@ -1,18 +1,15 @@
 import {
-  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
 import globalsHref from "./globals.scss?url";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { Suspense } from "react";
+import { LinksFunction } from "@remix-run/cloudflare";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
