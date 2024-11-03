@@ -1,0 +1,236 @@
+@use "vars.module.scss";
+
+.light {
+  --icon-border: #cec9fa;
+  --icon-color: #aeb474;
+  font-size: 14pt;
+
+  .profile {
+    .profileElement {
+      background: #fff;
+      box-shadow: 2px 2px 3px vars.$light-shadow;
+
+      .profileIcon {
+        color: var(--icon-color);
+      }
+
+      .profileTitle {
+        color: vars.$light-subtext;
+      }
+    }
+
+    .summary {
+      background: #fff;
+      box-shadow: 2px 2px 3px vars.$light-shadow;
+    }
+  }
+
+  .technologies {
+    .tech {
+      .techItem {
+        background: #fff;
+        box-shadow: 2px 2px 3px vars.$light-shadow;
+
+        .techIcon {
+          color: var(--icon-color);
+          border-color: var(--icon-border);
+        }
+
+        .techDescription {
+          color: vars.$light-subtext;
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  --icon-border: #7b72ca;
+  --icon-color: #aab44d;
+  font-size: 14pt;
+
+  .profile {
+    .profileElement {
+      background: vars.$dark-text-bg;
+      box-shadow: 2px 2px 3px vars.$dark-shadow;
+    }
+
+    .profileIcon {
+      color: var(--icon-color);
+    }
+
+    .summary {
+      background: vars.$dark-text-bg;
+      box-shadow: 2px 2px 3px vars.$dark-shadow;
+    }
+  }
+
+  .technologies {
+    .tech {
+      .techItem {
+        background: vars.$dark-text-bg;
+        box-shadow: 2px 2px 3px vars.$dark-shadow;
+      }
+
+      .techIcon {
+        color: var(--icon-color);
+        border-color: var(--icon-border);
+      }
+
+      .techDescription {
+        color: vars.$dark-subtext;
+      }
+    }
+  }
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.profileContainer {
+  margin: 10vh 0vw 23vh 0vw;
+
+  @media screen and (max-width: 810px) {
+    margin-top: 6vh;
+  }
+
+  .profile {
+    display: flex;
+    margin: auto;
+
+    @media screen and (max-width: 810px) {
+      flex-flow: column;
+      width: 100%;
+      font-size: 12pt;
+    }
+
+    @media screen and (min-width: 810px) {
+      flex-flow: row;
+    }
+
+    .info {
+      @media screen and (min-width: 810px) {
+        flex: 0 0 25%;
+      }
+
+      .profileElement {
+        @media screen and (min-width: 810px) {
+          width: 80%;
+        }
+
+        & {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-bottom: 2vh;
+          padding: 5px;
+          border-radius: 10px;
+
+          .profileIcon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            padding: 5px;
+          }
+
+          .profileContent {
+            font-size: 15pt;
+
+            @media screen and (max-width: 810px) {
+              font-size: 14pt;
+            }
+          }
+        }
+      }
+    }
+
+    .summary {
+      padding: 2px 15px 5px 15px;
+      border-radius: 10px;
+      margin-bottom: 2vh;
+      line-height: 1.5;
+    }
+  }
+}
+
+.technologies {
+  margin-top: 8%;
+  margin-bottom: 15%;
+  padding-bottom: 5%;
+
+  @media screen and (min-width: 810px) {
+    margin-bottom: 5%;
+  }
+
+  .tech {
+    width: 100%;
+    margin: auto;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 8vh;
+
+    @media screen and (min-width: 810px) {
+      flex-flow: row nowrap;
+      gap: 0;
+    }
+
+    .techItem {
+      padding: 5px;
+      border-radius: 10px;
+      width: 100%;
+      margin-bottom: 5%;
+
+      @media screen and (min-width: 810px) {
+        flex-basis: 18%;
+        margin-bottom: 0;
+        padding: 15px;
+      }
+    }
+
+    .techIcon {
+      width: 50px;
+      height: 50px;
+      margin: auto;
+      padding: 4px;
+      border-radius: 50%;
+      border-width: 3px;
+      border-style: solid;
+
+      @media screen and (min-width: 810px) {
+        width: 60px;
+        height: 60px;
+        padding: 7px;
+      }
+    }
+
+    .techIcon:hover {
+      cursor: pointer;
+    }
+
+    .techName {
+      margin: 1% 0vw 1% 0vw;
+      text-align: center;
+      font-weight: 600;
+
+      @media screen and (min-width: 810px) {
+        margin: 3vh 0vw 1vh 0vw;
+      }
+    }
+
+    .techDescription {
+      font-size: 12pt;
+      line-height: 1.5;
+      padding: 10px;
+    }
+  }
+}

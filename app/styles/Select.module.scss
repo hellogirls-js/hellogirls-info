@@ -1,0 +1,47 @@
+@use "vars.module.scss";
+
+.selectMain {
+  display: inline-flex;
+  flex-flow: column;
+  padding: 5px;
+  width: 100%;
+
+  select {
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 12pt;
+    border-radius: 3px;
+  }
+
+  .label {
+    margin-bottom: 1vh;
+  }
+}
+
+.light {
+  --select-bg-light: #fff;
+
+  select {
+    background: var(--select-bg-light);
+    color: vars.$light-button-text;
+    border-color: vars.$light-button-border;
+  }
+
+  .label {
+    color: vars.$light-subtext;
+  }
+}
+
+.dark {
+
+  select {
+    background: vars.$dark-text-bg;
+    color: vars.$dark-button-text;
+    border-color: vars.$dark-button-border;
+  }
+
+  .label {
+    color: vars.$dark-subtext;
+  }
+}

@@ -1,0 +1,66 @@
+@use "vars.module.scss";
+
+.posts {
+  width: 60%;
+
+  @media screen and (max-width: 812px) {
+    width: 100%;
+  }
+
+  .post {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 8vh 0%;
+
+    .postTitle {
+      @media screen and (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+
+    .postAuthor {
+      font-size: 0.9rem;
+    }
+
+    .postStats {
+      font-size: 0.9rem;
+      margin-top: 1%;
+      display: flex;
+      gap: 3px;
+
+      .postDates {
+        font-size: 10pt;
+      }
+
+      @media screen and (max-width: 812px) {
+        flex-flow: column;
+      }
+    }
+
+    .postDesc {
+      margin-top: 2vh;
+    }
+  }
+}
+
+.light {
+  .post {
+    background: #fff;
+    box-shadow: 2px 2px 3px vars.$light-shadow;
+
+    .postStats {
+      color: vars.$light-subtext;
+    }
+  }
+}
+
+.dark {
+  .post {
+    background: vars.$dark-text-bg;
+    box-shadow: 2px 2px 3px vars.$dark-shadow;
+
+    .postStats {
+      color: vars.$dark-subtext;
+    }
+  }
+}

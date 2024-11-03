@@ -1,0 +1,29 @@
+@use "vars.module.scss";
+
+.imgContainer {
+  margin: 5% auto;
+  text-align: center;
+
+  .caption {
+    font-size: 11pt;
+    font-style: italic;
+  }
+
+  img {
+    border-radius: 10px;
+    width: 90%;
+    height: auto;
+  }
+}
+
+.light {
+  .caption {
+    color: vars.$light-subtext;
+  }
+}
+
+.dark {
+  .caption {
+    color: vars.$dark-subtext;
+  }
+}

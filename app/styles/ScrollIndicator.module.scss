@@ -1,0 +1,48 @@
+.indicator {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    margin: auto;
+  }
+
+  .bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 12px;
+  }
+}
+
+.light {
+  --bar-color: #bfc96b;
+  --bar-bg: #e1dff1;
+    width: 70%;
+    height: 60%;
+    margin: auto;
+
+  .indicator {
+    background: var(--bar-bg);
+
+    .bar {
+      background: var(--bar-color);
+    }
+  }
+}
+
+.dark {
+  --bar-color: #a1a85b;
+  --bar-bg: #1e1a42;
+  width: 70%;
+  height: 60%;
+  margin: auto;
+
+  .indicator {
+    background: var(--bar-bg);
+
+    .bar {
+      background: var(--bar-color);
+    }
+  }
+}

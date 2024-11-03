@@ -1,0 +1,74 @@
+@use "./styles/vars.module.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  ::selection {
+    background-color: #9da839;
+    color: #fff;
+  }
+
+  ::-moz-selection {
+    background-color: #9da839;
+    color: #fff;
+  }
+
+  #__next {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-family: vars.$header-font;
+    margin: 0;
+    margin-bottom: 4vh;
+  }
+  
+  h2 {
+    font-size: 24pt;
+    margin: 4vh 0vw;
+    font-family: vars.$header-font;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20pt;
+    }
+  }
+
+  h3 {
+    font-size: 19pt;
+    margin: 2vh 0;
+    font-weight: 500;
+
+    @media screen and (max-width: 768px) {
+      font-size: 18pt;
+    }
+  }
+
+  hr {
+    width: 98%;
+    min-height: 1px;
+    margin: 3vh auto;
+    border: none;
+  }
+
+}
+
+:root {
+  width: 100%;
+  max-width: 100%;
+  font-family: vars.$body-font;
+
+  a:link {
+    text-decoration: none;
+  }
+}
+
+.dark {
+  background-color: vars.$dark-bg;
+  color: vars.$dark-text;
+}
+
+.light {
+  background: linear-gradient(vars.$light-bg, vars.$light-bg-grad);
+  color: vars.$light-text;
+}

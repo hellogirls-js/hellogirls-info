@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono&display=swap');
+
+/* COLORS */
+
+$primary-color: #1900ff;
+$accent-color: #e5ff00;
+
+// light colors
+
+$light-bg: #f5f4fa;
+$light-bg-grad: #f3f2f8;
+$light-heading-bg: #e1def5;
+$light-heading-border: #d3cfeb;
+$light-heading-2: #635caf;
+$light-text: #131038;
+$light-subtext: #5b5599;
+$light-shadow: #b5afcf94;
+$tooltip-bg: #2f267eee;
+$light-link: #7d8534;
+$light-blockquote: #b8c543;
+$light-bold-text: #6b65a8;
+$light-button-border: #b5aef0;
+$light-button-text: #7c73ce;
+$light-form-button-bg: #dde29e;
+$light-form-button-text: #5f661c;
+$light-form-button-border: #b0b86a;
+
+// dark colors
+
+$dark-bg: #282450;
+$dark-bg-grad: #231f4b;
+$dark-heading-bg: #201c44;
+$dark-heading-border: #413b79;
+$dark-heading-2: #c1bbfa;
+$dark-shadow: #09072094;
+$dark-text: #f3f1ff;
+$dark-subtext: #cfc8fa;
+$dark-text-bg: #201c44;
+$dark-link: #b4c044;
+$dark-blockquote: #97a047;
+$dark-bold-text: #c2bdf5;
+$dark-button-border: #5b53a8;
+$dark-button-text: #ddd9ff;
+$dark-form-button-bg: #636646;
+$dark-form-button-text: #ebf5b4;
+$dark-form-button-border: #414230;
+
+/* FONTS */
+
+$body-font: "Inter", sans-serif;
+$header-font: "Space Mono", monospace;

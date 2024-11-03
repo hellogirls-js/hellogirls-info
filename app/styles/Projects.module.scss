@@ -1,0 +1,82 @@
+@use "vars.module.scss";
+
+.projects {
+  .projectsGrid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding-bottom: 2%;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+
+    .project {
+      padding: 20px;
+      border-radius: 10px;
+
+      @media screen and (max-width: 768px) {
+        margin: 5% 0%;
+      }
+
+      .projectUrl {
+        margin: 4% 0% 2% 0%;
+
+        a:link {
+          font-weight: bold;
+          padding: 3px;
+          border-radius: 5px;
+        }
+      }
+
+      .projectDesc {
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.light {
+  --link-bg: #a0ac39;
+
+  .projectsGrid {
+    .project {
+      background: #fff;
+      box-shadow: 2px 2px 3px vars.$light-shadow;
+
+      .projectUrl {
+        a:link,
+        a:visited {
+          background: var(--link-bg);
+          color: #fff;
+        }
+      }
+
+      .projectDesc {
+        color: vars.$light-subtext;
+      }
+    }
+  }
+}
+
+.dark {
+  --link-bg: #6f7448;
+  .projectsGrid {
+    .project {
+      background: vars.$dark-text-bg;
+      box-shadow: 2px 2px 3px vars.$dark-shadow;
+
+      .projectUrl {
+        a:link,
+        a:visited {
+          background: var(--link-bg);
+          color: #fff;
+        }
+      }
+
+      .projectDesc {
+        color: vars.$dark-subtext;
+      }
+    }
+  }
+}

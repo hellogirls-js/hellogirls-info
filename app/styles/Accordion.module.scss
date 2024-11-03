@@ -1,0 +1,27 @@
+.accordion {
+  width: 60%;
+  margin: auto;
+  margin-top: 5%;
+
+  @media screen and (max-width: 810px) {
+    width: 100%;
+  }
+
+  .accordionHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background: none;
+    color: inherit;
+
+    h3 {
+      font-size: 20pt;
+    }
+  }
+
+  .accordionHeader:hover {
+    cursor: pointer;
+  }
+}
