@@ -33,7 +33,7 @@ import {
 import OverallResults from "@/components/FanQuiz/OverallResults";
 
 import { shuffleArray } from "@/utilities";
-import { json } from "@remix-run/cloudflare";
+import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { createBrowserClient } from "@supabase/ssr";
 import { QuizHeader } from "@/components/FanQuiz/QuizHeader";
@@ -760,10 +760,10 @@ export default function EnstarsFanQuiz() {
   );
 }
 
-export async function loader() {
+export async function loader({ context }: LoaderFunctionArgs) {
   const env = {
-    QUIZ_SUPABASE_URL: process.env.PUBLIC_QUIZ_SUPABASE_URL!,
-    QUIZ_API_KEY: process.env.PUBLIC_QUIZ_API_KEY!,
+    QUIZ_SUPABASE_URL: context.cloudflare.env.PUBLIC_QUIZ_SUPABASE_URL!,
+    QUIZ_API_KEY: context.cloudflare.env.PUBLIC_QUIZ_API_KEY!,
   };
   return json({ env });
 }

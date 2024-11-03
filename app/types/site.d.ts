@@ -1,9 +1,9 @@
 type ColorThemeOption = "dark" | "light";
 
 interface Env {
-  birthday: string | undefined;
-  NEXT_PUBLIC_QUIZ_SUPABASE_URL: string | undefined;
-  NEXT_PUBLIC_QUIZ_API_KEY: string | undefined;
+  BIRTHDAY: string | undefined;
+  PUBLIC_QUIZ_SUPABASE_URL: string | undefined;
+  PUBLIC_QUIZ_API_KEY: string | undefined;
 }
 
 interface DarkModeContextType {

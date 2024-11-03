@@ -1,7 +1,11 @@
 import React from "react";
 import Profile from "@/components/Home/Profile";
 import MainLayout from "@/layouts/MainLayout";
-import { json, type MetaFunction } from "@remix-run/cloudflare";
+import {
+  json,
+  LoaderFunctionArgs,
+  type MetaFunction,
+} from "@remix-run/cloudflare";
 
 import styles from "@/styles/Home.module.scss";
 import Tech from "@/components/Home/Tech";
@@ -15,8 +19,8 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader() {
-  return json({ birthday: process.env.BIRTHDAY });
+export async function loader({ context }: LoaderFunctionArgs) {
+  return json({ birthday: context.cloudflare.env.BIRTHDAY });
 }
 
 export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
@@ -31,9 +35,7 @@ export function HydrateFallback() {
 
 export default function Index() {
   const env = useLoaderData<typeof clientLoader>();
-  const birthday = React.useRef(
-    (env as { birthday: string | undefined }).birthday ?? "",
-  );
+  const birthday = React.useRef((env as Env).BIRTHDAY ?? "");
   const { colorTheme } = React.useContext(DarkModeContext);
 
   return (

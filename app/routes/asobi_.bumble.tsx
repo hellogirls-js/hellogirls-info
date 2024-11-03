@@ -15,7 +15,7 @@ import GameFooter from "@/components/Asobi/Bumble/GameFooter";
 import GameHeader from "@/components/Asobi/Bumble/GameHeader";
 import MatchScreen from "@/components/Asobi/Bumble/MatchScreen";
 import { createBrowserClient } from "@supabase/ssr";
-import { MetaFunction } from "@remix-run/cloudflare";
+import { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,15 +24,15 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader() {
+export async function loader({ context }: LoaderFunctionArgs) {
   const DATA_URL = "https://tl.data.ensemble.moe/en/characters.json";
   const JP_DATA_URL = "https://data.ensemble.moe/ja/characters.json";
   const CARD_DATA_URL = "https://data.ensemble.moe/ja/cards.json";
 
   let charaData: JPCharacterData[];
   const env = {
-    QUIZ_SUPABASE_URL: process.env.PUBLIC_QUIZ_SUPABASE_URL!,
-    QUIZ_API_KEY: process.env.PUBLIC_QUIZ_API_KEY!,
+    QUIZ_SUPABASE_URL: context.cloudflare.env.PUBLIC_QUIZ_SUPABASE_URL!,
+    QUIZ_API_KEY: context.cloudflare.env.PUBLIC_QUIZ_API_KEY!,
   };
 
   try {

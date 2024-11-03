@@ -8,15 +8,16 @@ import { json, MetaFunction, useLoaderData } from "@remix-run/react";
 import { createBrowserClient } from "@supabase/ssr";
 import { QuizHeader } from "@/components/FanQuiz/QuizHeader";
 import QuizCredit from "@/components/FanQuiz/QuizCredit";
+import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = () => {
   return [{ title: "overall results | what kind of enstars fan are you?" }];
 };
 
-export async function loader() {
+export async function loader({ context }: LoaderFunctionArgs) {
   const env = {
-    QUIZ_SUPABASE_URL: process.env.PUBLIC_QUIZ_SUPABASE_URL!,
-    QUIZ_API_KEY: process.env.PUBLIC_QUIZ_API_KEY!,
+    QUIZ_SUPABASE_URL: context.cloudflare.env.PUBLIC_QUIZ_SUPABASE_URL!,
+    QUIZ_API_KEY: context.cloudflare.env.PUBLIC_QUIZ_API_KEY!,
   };
   return json({ env });
 }
