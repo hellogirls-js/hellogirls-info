@@ -4,7 +4,6 @@ import styles from "@/styles/MarriageSurvey.module.scss";
 
 import TotalResults from "@/components/MarriageSurvey/TotalResults";
 import WordOccurences from "@/components/MarriageSurvey/WordOccurrences";
-import WordCloud from "@/components/MarriageSurvey/WordCloud";
 import RankingSummary from "@/components/MarriageSurvey/RankingSummary";
 
 import { DarkModeContext } from "@/contexts/DarkModeContext";
@@ -84,7 +83,6 @@ export default function MarriageSurveyResults() {
           <RankingSummary {...{ rawData, enData }} />
           <TotalResults {...{ rawData, enData }} />
           <WordOccurences {...{ rawData, enData }} />
-          <WordCloud {...{ rawData, enData }} />
           <h2 id="conclusion">conclusion</h2>
           <p>
             thank you for taking the time to go thru this page! i hope you had
