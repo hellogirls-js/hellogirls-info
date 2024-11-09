@@ -1,0 +1,172 @@
+@use "vars.module.scss";
+@import url("https://use.typekit.net/yck3zmo.css");
+
+@keyframes scroll-left {
+  0% {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+body {
+  background-image: linear-gradient(#c7bdff, #d6cfff);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.carrdPage {
+  --heading-font: "omnes-pro", sans-serif;
+
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  font-size: 16px;
+
+  .floatingNiki {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: min(100%, 600px);
+    height: auto;
+
+    img {
+      width: 100%;
+      filter: drop-shadow(0px 8px 8px #00000022);
+    }
+  }
+
+  .sparkles {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    overflow: clip;
+
+    .sparkle {
+      position: absolute;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--heading-font);
+    font-style: italic;
+    font-weight: 900;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 3.5em;
+    text-shadow: 0px 0px 12px #8f9c1a;
+  }
+
+  h2,
+  h3 {
+    color: #a0ab3c;
+    margin: 0;
+    margin-bottom: 1em;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #7362d1;
+    }
+  }
+
+  strong {
+    font-family: var(--heading-font);
+    font-weight: 800;
+    color: #7362d1;
+    font-style: italic;
+    font-size: 1.1em;
+  }
+
+  .carrdContainer {
+    position: relative;
+    width: min(96%, 810px);
+    margin: auto;
+    padding: 5% 0%;
+    z-index: 99;
+
+    @media (orientation: portrait) {
+      padding-bottom: 16em;
+    }
+
+    .carrdSection {
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0px 8px 8px #00000033;
+      padding: 3em;
+      border-radius: 8px;
+      box-sizing: border-box;
+      overflow: clip;
+      line-height: 1.5;
+
+      .carrdPills {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 2em;
+
+        @media (orientation: portrait) {
+          flex-flow: column nowrap;
+          align-items: flex-start;
+          gap: 1em;
+        }
+
+        .carrdPill {
+          display: flex;
+          gap: 0.5em;
+          align-items: center;
+          padding: 1% 2%;
+          border-radius: 50px;
+          box-shadow: 0px 2px 2px #00000033;
+          background-color: #edf2bf;
+          color: #636932;
+          transition: transform 0.2s;
+          cursor: default;
+
+          @media (orientation: portrait) {
+            width: 100%;
+          }
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          .carrdPillIcon {
+            svg {
+              color: #7362d1;
+            }
+          }
+        }
+      }
+
+      .marquee {
+        animation: scroll-left 20s linear infinite;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        img {
+          width: 33%;
+          height: auto;
+          border-radius: 4px;
+        }
+      }
+
+      ul {
+        li {
+          margin: 1em 0em;
+        }
+      }
+    }
+  }
+}
