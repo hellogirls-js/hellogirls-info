@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 /**
  * get a random index from a given array
  * @param array {T[]} the array to get an index from
@@ -29,7 +31,7 @@ export async function getData(url: string): Promise<any> {
   try {
     const data = await fetch(url);
     if (data) {
-      const jsonData = await data.json();
+      const jsonData: any = await data.json();
       if (jsonData.length) {
         const compliantData = jsonData.filter(
           (data: any) => data.compliant === "TRUE",
@@ -44,6 +46,10 @@ export async function getData(url: string): Promise<any> {
     console.error("could not retrieve data", e.message);
     return [];
   }
+}
+
+export function computeAge(birthday: string): number {
+  return dayjs().diff(dayjs(birthday), "year");
 }
 
 export * from "@/utilities/conversions";

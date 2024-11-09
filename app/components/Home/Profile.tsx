@@ -8,6 +8,7 @@ import {
 } from "@/components/utility/AnimatedIcons";
 import Strong from "@/components/utility/Strong";
 import { Link } from "@remix-run/react";
+import { computeAge } from "@/utilities";
 
 export default function Profile({
   styles,
@@ -26,7 +27,7 @@ export default function Profile({
     },
     {
       title: "age",
-      content: `${dayjs().diff(dayjs(birthday), "year")} years old`,
+      content: `${computeAge(birthday)} years old`,
       icon: IconZodiacAries,
     },
     {

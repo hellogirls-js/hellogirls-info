@@ -10,6 +10,7 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { LinksFunction } from "@remix-run/cloudflare";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
