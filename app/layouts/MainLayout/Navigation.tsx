@@ -1,10 +1,11 @@
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-import { IconCat, IconFolders, IconHeart, IconNews } from "@tabler/icons-react";
+  IconCat,
+  IconFolders,
+  IconHeart,
+  IconHome,
+  IconNews,
+} from "@tabler/icons-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import styles from "@/styles/MainLayout.module.scss";
@@ -26,7 +27,7 @@ function NavigationButton({
       id="nav-button"
       className={clsx(styles.button, isOpen && styles.openButton)}
       onClick={() => {
-        onClick(prev => !prev);
+        onClick((prev) => !prev);
       }}
     >
       <IconHeart size={40} />
@@ -34,11 +35,7 @@ function NavigationButton({
   );
 }
 
-function NavigationMenu({
-  isOpen,
-}: {
-  isOpen: boolean;
-}) {
+function NavigationMenu({ isOpen }: { isOpen: boolean }) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,6 +46,11 @@ function NavigationMenu({
           exit={{ opacity: 0, scale: 0 }}
         >
           <ul>
+            <li>
+              <Link to="/">
+                <IconHome size={16} /> home
+              </Link>
+            </li>
             <li>
               <Link to="/projects">
                 <IconFolders size={16} /> projects
@@ -81,7 +83,7 @@ export default function Navigation() {
         <NavigationButton isOpen={isOpen} onClick={openMenu} />
       </Tooltip>
 
-      <NavigationMenu {...{isOpen}} />
+      <NavigationMenu {...{ isOpen }} />
     </div>
   );
 }

@@ -13,8 +13,12 @@ export default function MainLayout({
   children,
   heading,
 }: {
-  children?: JSX.Element | string;
-  heading: string;
+  children?:
+    | React.ReactElement
+    | Array<React.ReactElement | string | boolean>
+    | string
+    | boolean;
+  heading?: string;
 }) {
   const { colorTheme } = React.useContext(DarkModeContext);
 
@@ -25,7 +29,7 @@ export default function MainLayout({
   return (
     <div id="main-layout" className={`${styles.main} ${styles[colorTheme]}`}>
       <Menu />
-      <Header heading={heading} />
+      {heading && <Header heading={heading} />}
       <main className={styles.component}>{children}</main>
       <Navigation />
       <Footer />

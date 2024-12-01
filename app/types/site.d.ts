@@ -104,6 +104,13 @@ interface EnCharacterData {
   cards?: number[];
 }
 
+interface ENUnitData {
+  id: number;
+  name: string;
+  tagline: string;
+  description: string;
+}
+
 interface JPCharacterData extends EnCharacterData {
   unit: number[];
   image_color?: string;
@@ -126,4 +133,10 @@ interface JPCharacterData extends EnCharacterData {
   specialty: string;
   quote: string;
   horoscope: number;
+}
+
+interface UnitToCharacter {
+  id: number;
+  unit_id: number;
+  character_id: number;
 }

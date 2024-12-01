@@ -27,7 +27,7 @@ export function shuffleArray<T>(array: T[]): T[] {
  * @param url MakoTools url to grab data from, either en or jp character or unit data
  * @returns a promise that returns the specified data array
  */
-export async function getData(url: string): Promise<any> {
+export async function getData<T>(url: string): Promise<T[]> {
   try {
     const data = await fetch(url);
     if (data) {
@@ -36,7 +36,9 @@ export async function getData(url: string): Promise<any> {
         const compliantData = jsonData.filter(
           (data: any) => data.compliant === "TRUE",
         );
-        return compliantData;
+        return compliantData as T[];
+      } else {
+        return [];
       }
     } else {
       return [];

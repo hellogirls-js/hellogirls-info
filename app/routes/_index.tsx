@@ -31,7 +31,7 @@ export async function clientLoader({ serverLoader }: ClientLoaderFunctionArgs) {
 clientLoader.hydrate = true;
 
 export function HydrateFallback() {
-  return <MainLayout heading="loading...">Loading...</MainLayout>;
+  return <MainLayout>Loading...</MainLayout>;
 }
 
 export default function Index() {
