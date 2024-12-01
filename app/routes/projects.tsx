@@ -133,6 +133,17 @@ export default function Projects() {
       finished: true,
     },
     {
+      title: "enstars favorites picker",
+      url: "/projects/enstars-faves-picker",
+      description: (
+        <p className={styles.projectDesc}>
+          just a site that lets you pick your favorite enstars characters from
+          each unit! this uses konva.js to generate a template image.
+        </p>
+      ),
+      finished: true,
+    },
+    {
       title: "enstars marriage survey data visualization",
       url: "/projects/marriage-survey-results",
       description: (

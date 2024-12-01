@@ -121,12 +121,14 @@ function FinalImageItem({
   y,
   setLoadedImages,
   unit,
+  index,
 }: {
   charaId: number;
   x: number;
   y: number;
   setLoadedImages: UseListStateHandlers<string>;
   unit: ENUnitData & { image_color: string; order: number };
+  index: number;
 }) {
   const [charaImage] = useImage(
     `/card_full1_${twoStarIDs[charaId]}_normal.png`,
@@ -134,14 +136,14 @@ function FinalImageItem({
   const [unitImage] = useImage(`/unit_logo_border_${unit.id}.png`);
 
   useEffect(() => {
-    if (charaImage && unitImage)
-      setLoadedImages.append(...[charaImage.src, unitImage.src]);
+    if (charaImage) setLoadedImages.append(charaImage.src);
+    if (unitImage) setLoadedImages.append(unitImage.src);
   }, [charaImage, unitImage]);
 
   const unitColor = Color(unit.image_color);
 
   return (
-    <Group key={charaId} {...{ x, y }}>
+    <Group key={index} {...{ x, y }}>
       <Rect
         width={220}
         height={240}
@@ -157,18 +159,16 @@ function FinalImageItem({
         x={450}
         y={40}
       />
-      {charaId > 0 && (
-        <Group clip={{ width: 220, height: 240, x: 450, y: 40 }}>
-          <KonvaImage
-            image={unitImage}
-            opacity={0.1}
-            y={60}
-            x={420}
-            scale={{ x: 0.7, y: 0.7 }}
-          />
-          <KonvaImage image={charaImage} x={-10} zIndex={1} />
-        </Group>
-      )}
+      <Group clip={{ width: 220, height: 240, x: 450, y: 40 }}>
+        <KonvaImage
+          image={unitImage}
+          opacity={0.1}
+          y={60}
+          x={420}
+          scale={{ x: 0.7, y: 0.7 }}
+        />
+        {charaId > 0 && <KonvaImage image={charaImage} x={-10} zIndex={1} />}
+      </Group>
       <Rect
         width={220}
         height={240}
@@ -215,12 +215,19 @@ function FinalImageCanvas({
   const [bgImage] = useImage("/triangle_bg.png");
   const bgImageRef = useRef<Konva.Image>(null);
 
+  console.log({ charaPicks });
+
+  const expectedLength =
+    charaPicks.filter((id) => id > 0).length + unitData.length;
+
+  console.table({
+    expectedLength,
+    loadedImagesLength: loadedImages.length,
+    loadedImages,
+  });
+
   useEffect(() => {
-    if (
-      canvasRef.current &&
-      loadedImages.length >=
-        charaPicks.filter((id) => id > 0).length + unitData.length
-    ) {
+    if (canvasRef.current && loadedImages.length >= expectedLength) {
       canvasRef.current
         .toImage({
           callback: (img) => {
@@ -276,8 +283,8 @@ function FinalImageCanvas({
         {charaPicks.map((charaId, index) => {
           return (
             <FinalImageItem
-              key={charaId}
-              {...{ charaId, setLoadedImages }}
+              key={index}
+              {...{ charaId, setLoadedImages, index }}
               x={240 * (index % 4) - 380}
               y={250 * Math.floor((index + 1) / 4)}
               unit={unitData.filter((unit) => unit.order - 1 === index)[0]}
