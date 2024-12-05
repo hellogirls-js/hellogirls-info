@@ -62,15 +62,15 @@ function SectionContent({
           </ul>
           <p style={{ fontSize: "0.9rem" }}>
             <strong>note!</strong> rinniki is my favorite ship in enstars and i
-            pretty monoship rinne with niki (with one exception)! however, i
-            don't monoship niki with anyone and dabble in other niki ships here
-            and there. these ships include nikihime, kuroniki, nazuniki,
+            pretty much monoship rinne with niki (with one exception)! however,
+            i don't monoship niki with anyone and i dabble in other niki ships
+            here and there. these ships include nikihime, kuroniki, nazuniki,
             yuzuniki, and natsuniki.
           </p>
           <ul>
             <li>
               <strong>other things i like:</strong> pokemon, animal crossing,
-              cookie clicker, sanrio
+              cookie clicker, sanrio, webtoons
             </li>
           </ul>
         </>
