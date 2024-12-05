@@ -226,7 +226,9 @@ export default function Twitter() {
               ))}
               <div
                 className={styles.tabBg}
-                style={{ transform: `translateX(${sectionIndex * 100}%)` }}
+                style={{
+                  transform: `translateX(${(sectionIndex < 0 ? 0 : sectionIndex) * 100}%)`,
+                }}
               />
             </div>
           </nav>

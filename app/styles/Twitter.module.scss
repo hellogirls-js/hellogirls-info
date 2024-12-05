@@ -1,4 +1,5 @@
 @use "vars.module.scss";
+@import "node_modules/@tabler/icons-webfont/dist/tabler-icons-filled.scss";
 @import url("https://use.typekit.net/yck3zmo.css");
 
 @keyframes scroll-left {
@@ -163,28 +164,32 @@ body {
         }
 
         ul {
-          list-style: none;
-
           li {
-            list-style-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%237aafff" class="icon icon-tabler icons-tabler-outline icon-tabler-heart"><path d="M0 0h24v24H0z" fill="context-fill" stroke="none"/><path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/></svg>');
+            // list-style-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%237aafff" class="icon icon-tabler icons-tabler-outline icon-tabler-heart"><path d="M0 0h24v24H0z" fill="context-fill" stroke="none"/><path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/></svg>');
             line-height: 24px;
             margin: 0.5em 0px;
+
+            &::marker {
+              color: #7aafff;
+            }
           }
         }
 
         .contentAboutBasics {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          grid-gap: 1rem;
+          grid-gap: 0.5rem;
 
           .contentPill {
+            font-size: 1.1em;
             display: flex;
             align-items: center;
-            margin: 2vh 0vw;
+            margin: 0.5em 0vw;
             background-color: #7886ed33;
             color: #7886ed;
             border-radius: 50px;
             padding: 0.5em;
+            box-shadow: 0px 2px 2px #00000008;
 
             .contentPillIcon {
               aspect-ratio: 1;
@@ -223,7 +228,7 @@ body {
           align-items: center;
           background-color: #92a1f043;
           border-radius: 50px;
-          padding: 1% 3% 1% 1%;
+          padding: 0.25em 0.5em 0.25em 0.25em;
           margin: 0% 2%;
           font-size: 0.9em;
 
