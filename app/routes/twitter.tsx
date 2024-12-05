@@ -1,207 +1,112 @@
 import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
 import styles from "@/styles/Twitter.module.scss";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import {
-  IconAsterisk,
+  IconAt,
+  IconBrandTwitter,
   IconCircleCheck,
   IconCode,
   IconSignature,
   IconZodiacAries,
 } from "@tabler/icons-react";
-import { useInterval, useListState } from "@mantine/hooks";
 import { computeAge } from "@/utilities";
+import clsx from "clsx";
 
 export function loader({ context }: LoaderFunctionArgs) {
   return json({ birthday: context.cloudflare.env.BIRTHDAY });
 }
 
-function Sparkle({ x, y }: { x: number; y: number }) {
+const sections = ["#about", "#faves", "#rules"];
+type Section = (typeof sections)[number];
+
+function ContentPill({ icon, text }: { icon: ReactNode; text: string }) {
   return (
-    <AnimatePresence>
-      <motion.span
-        className={styles.sparkle}
-        style={{
-          left: x,
-          top: y,
-        }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: Math.random(), scale: 1 }}
-        exit={{ opacity: 0, scale: 0 }}
-      >
-        <IconAsterisk size={8} color="white" />
-      </motion.span>
-    </AnimatePresence>
+    <div className={styles.contentPill}>
+      <div className={styles.contentPillIcon}>{icon}</div>
+      <div className={styles.contentPillText}>{text}</div>
+    </div>
   );
 }
 
-const sections = ["about", "byf", "rules", "links"];
-type Section = (typeof sections)[number];
-
-export default function Twitter() {
-  const env = useLoaderData<typeof loader>();
-  const birthdayRef = useRef(env.birthday as string);
-
-  const [vw, setVw] = useState<number>();
-  const [vh, setVh] = useState<number>();
-
-  const [sparklePlacements, sparklesHandler] = useListState<{
-    x: number;
-    y: number;
-  }>([]);
-
-  const addSparkleInterval = useCallback(() => {
-    if (vw && vh) {
-      if (sparklePlacements.length > Math.ceil((vw ?? 750) / 15)) {
-        sparklesHandler.remove(0);
-      }
-      const xCoord = Math.random() * vw;
-      const yCoord = Math.random() * vh;
-      sparklesHandler.append({ x: xCoord, y: yCoord });
-    }
-  }, [vw, vh]);
-
-  const removeSparkleInterval = useCallback(() => {
-    sparklesHandler.remove(0);
-  }, [sparklePlacements]);
-
-  const addSparkle = useInterval(addSparkleInterval, 999);
-  const removeSparkle = useInterval(removeSparkleInterval, 1000);
-
-  useEffect(() => {
-    setVw(window.innerWidth);
-    setVh(window.innerHeight);
-
-    window.addEventListener("resize", () => {
-      setVw(window.innerWidth);
-      setVh(window.innerHeight);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (vw && vh && !addSparkle.active) {
-      addSparkle.start();
-    }
-  }, [vw, vh]);
-
-  useEffect(() => {
-    if (
-      sparklePlacements.length > Math.ceil((vw ?? 750) / 15) &&
-      !removeSparkle.active
-    ) {
-      removeSparkle.start();
-    }
-
-    if (sparklePlacements.length === 0) {
-      removeSparkle.stop();
-    }
-  }, [sparklePlacements]);
-
-  useEffect(() => {
-    if (env.birthday?.length) {
-      birthdayRef.current = env.birthday;
-    }
-  }, [env]);
-
-  return (
-    <div className={styles.carrdPage}>
-      <div className={styles.floatingNiki}>
-        <img
-          src="https://assets.enstars.link/assets/card_full1_3725_evolution.png"
-          alt="niki :)"
-        />
-      </div>
-      <main className={styles.carrdContainer}>
-        <h1>about!</h1>
-        <section className={styles.carrdSection}>
-          <h2>basics</h2>
-          <div className={styles.carrdPills}>
-            <div className={styles.carrdPill}>
-              <div className={styles.carrdPillIcon}>
-                <IconSignature />
-              </div>
-              son
-            </div>
-            <div className={styles.carrdPill}>
-              <div className={styles.carrdPillIcon}>
-                <IconZodiacAries />
-              </div>
-              {computeAge(birthdayRef.current)} years old
-            </div>
-            <div className={styles.carrdPill}>
-              <div className={styles.carrdPillIcon}>
-                <IconCircleCheck />
-              </div>
-              she/he
-            </div>
-            <div className={styles.carrdPill}>
-              <div className={styles.carrdPillIcon}>
-                <IconCode />
-              </div>
-              javascript fiend
-            </div>
-          </div>
-          <h2 style={{ margin: "2em 0em 1em 0em" }}>more!</h2>
+function SectionContent({
+  section,
+  birthday,
+}: {
+  section: string;
+  birthday: string;
+}) {
+  switch (section) {
+    case "faves":
+      return (
+        <>
+          <img
+            src="https://static.wikia.nocookie.net/ensemble-stars/images/4/4c/ES2_Third_Anniversary_Set_2_Niki.png"
+            alt="my love"
+          />
+          <p>
+            <strong>niki shiina</strong> is currently my biggest comfort
+            character and i love him so much!! i lovemail him{" "}
+            <strong>a lot</strong> so heed with caution. if you also love him
+            then we are automatically best friends, i don't make the rules here!
+          </p>
           <ul>
-            <li>black and queer</li>
             <li>
-              eng enstars player as of <strong>june 2022</strong>
+              <strong>other favorite characters</strong> rinne, mayoi, tomoya,
+              tetora, makoto
+            </li>
+            <li>
+              <strong>favorite ships</strong> <em>rinniki</em> (switch=OK!),
+              kohaai, hiiteto
             </li>
           </ul>
-        </section>
-        <h1 style={{ margin: "1em 0em" }}>favorites</h1>
-        <section className={styles.carrdSection}>
-          <div className={styles.marquee}>
-            <h3>NIKI!!!!!</h3>
-            {[3725, 3283, 2182, 3132, 3507, 3082, 3527].map((id) => (
-              <img
-                src={`https://assets.enstars.link/assets/card_still_full1_${id}_normal.png`}
-                alt="NIKI"
-                key={id}
-              />
-            ))}
-          </div>
-          <p>
-            <strong>other favorite characters</strong> rinne, mayoi, tomoya,
-            kohaku, tetora
+          <p style={{ fontSize: "0.9rem" }}>
+            <strong>note!</strong> rinniki is my favorite ship in enstars and i
+            pretty monoship rinne with niki (with one exception)! however, i
+            don't monoship niki with anyone and dabble in other niki ships here
+            and there. these ships include nikihime, kuroniki, nazuniki,
+            yuzuniki, and natsuniki.
           </p>
-          <p>
-            <strong>favorite ships</strong> <em>rinniki</em>, hiiteto, kohaai
-          </p>
-          <p>
-            <strong>NOTE!</strong> rinniki is my favorite ship in enstars and i
-            monoship rinne with niki. however, i do very rarely dabble in other
-            niki ships which include nikihime, kuroniki, yuzuniki, nazuniki, and
-            natsuniki.
-          </p>
-        </section>
-        <h1 style={{ margin: "1em 0em" }}>before you follow</h1>
-        <section className={styles.carrdSection}>
+          <ul>
+            <li>
+              <strong>other things i like:</strong> pokemon, animal crossing,
+              cookie clicker, sanrio
+            </li>
+          </ul>
+        </>
+      );
+    case "rules":
+      return (
+        <>
+          <h3>before you follow...</h3>
           <ul>
             <li>
               i softblock to break mutuals <strong>very</strong> liberally, it's
-              usually to curate my space and is almost never personal
+              usually to curate my space and is almost never personal (i don't
+              like muting mutuals it feels rude)
             </li>
             <li>
-              that being said, i'd appreciate if mutuals softblock to break the
-              mutual
+              that being said, i'd appreciate if mutuals could softblock to
+              break the mutual
             </li>
             <li>
-              i swear <strong>a lot</strong>
+              i swear <strong>A LOT</strong>
             </li>
             <li>
               notifs are on for followers only and even then twitter doesn't
               show me every notif. most functional website
             </li>
             <li>
+              i'm very shy and am afraid of people on twitter so i don't reply
+              to most replies (even my own friends...) but i'll always like
+              replies i see ^.^
+            </li>
+            <li>
               <strong>i do not offer coding help!!</strong> i don't have time
-              unfortunately T__T
+              T__T
             </li>
           </ul>
-        </section>
-        <h1 style={{ margin: "1em 0em" }}>rules</h1>
-        <section className={styles.carrdSection}>
+          <h3>strict rules</h3>
           <ul>
             <li>
               <strong>
@@ -211,7 +116,7 @@ export default function Twitter() {
                 over real poc.
               </strong>{" "}
               i want nothing to do with you and nothing i make will ever be for
-              you.
+              you
             </li>
             <li>
               i am uncomfortable with incest and loli/shotacons, i don't
@@ -230,17 +135,132 @@ export default function Twitter() {
             </li>
             <li>
               <strong>
-                Involve me in discourse and it'll be the last thing you do.
+                Involve me in discourse and it will be the last thing you do.
               </strong>
             </li>
           </ul>
-        </section>
+        </>
+      );
+    default:
+      return (
+        <>
+          <p>
+            <div className={styles.contentAboutBasics}>
+              <ContentPill icon={<IconSignature />} text="son" />
+              <ContentPill
+                icon={<IconZodiacAries />}
+                text={`${computeAge(birthday)} years old`}
+              />
+              <ContentPill icon={<IconCircleCheck />} text="she/he" />
+            </div>
+            <ul>
+              <li>black and queer</li>
+              <li>coder by day, world's worst nikiP by night</li>
+              <li>
+                ENGstars player since <strong>june 2022</strong>
+              </li>
+              <li>transit enthusiast</li>
+            </ul>
+          </p>
+        </>
+      );
+  }
+}
+
+function FooterPill({
+  icon,
+  text,
+  url,
+}: {
+  icon: ReactNode;
+  text: string;
+  url: string;
+}) {
+  return (
+    <a href={url} target="_blank" className={styles.carrdFooterPill}>
+      <div className={styles.carrdFooterPillIcon}>{icon}</div>
+      <div className={styles.carrdFooterPillText}>{text}</div>
+    </a>
+  );
+}
+
+export default function Twitter() {
+  const env = useLoaderData<typeof loader>();
+  const birthdayRef = useRef(env.birthday as string);
+  const { hash } = useLocation();
+  const navigate = useNavigate();
+  console.log({ hash });
+
+  const [selectedSection, setSelectedSection] = useState<Section>(
+    hash.length === 0 ? hash : "#about",
+  );
+  const sectionName = hash.slice(1);
+
+  useEffect(() => {
+    if (sections.indexOf(hash) < 0) setSelectedSection("#about");
+    navigate({ hash: selectedSection });
+  }, [selectedSection]);
+
+  const sectionIndex = sections.indexOf(selectedSection);
+
+  return (
+    <div className={styles.carrdPage}>
+      <main className={styles.carrdContainer}>
+        <header className={styles.carrdHeader}>
+          <div className={styles.carrdHeaderBanner} />
+          <div className={styles.carrdHeaderIcon} />
+        </header>
+        <div className={styles.carrdContentContainer}>
+          <nav className={styles.carrdContentTabsContainer}>
+            <div className={styles.carrdContentTabs}>
+              {sections.map((section) => (
+                <button
+                  className={clsx(
+                    styles.carrdContentTabButton,
+                    selectedSection === section && styles.selected,
+                  )}
+                  onClick={() => setSelectedSection(section)}
+                >
+                  {section.slice(1)}
+                </button>
+              ))}
+              <div
+                className={styles.tabBg}
+                style={{ transform: `translateX(${sectionIndex * 100}%)` }}
+              />
+            </div>
+          </nav>
+          <section
+            className={clsx(
+              styles.carrdContent,
+              sectionIndex === sections.length - 1 && styles.removeRadius,
+            )}
+          >
+            <h2>{sectionName}</h2>
+            <SectionContent
+              section={sectionName}
+              birthday={birthdayRef.current}
+            />
+          </section>
+          <footer className={styles.carrdFooter}>
+            <FooterPill
+              icon={<IconBrandTwitter />}
+              text="HELLOGlRLS"
+              url="https://twitter.com/helloglrls"
+            />
+            <FooterPill
+              icon={<IconCode />}
+              text="hellogirls_DEV"
+              url="https://twitter.com/hellogirls_DEV"
+            />
+            <FooterPill
+              icon={<IconAt />}
+              text="niki"
+              url="https://stars.ensemble.moe/@niki"
+            />
+          </footer>
+        </div>
       </main>
-      <motion.div className={styles.sparkles}>
-        {sparklePlacements.map((coord) => (
-          <Sparkle key={`${coord.x}${coord.y}`} {...coord} />
-        ))}
-      </motion.div>
     </div>
   );
 }

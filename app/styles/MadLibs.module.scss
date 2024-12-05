@@ -3,9 +3,9 @@
   width: 96%;
   margin: auto;
   height: 100%;
-  
+
   @media screen and (min-width: 768px) {
-    overflow: clip;
+    overflow: hidden;
   }
 
   .madlibsContentBlock {
@@ -46,7 +46,7 @@
     text-align: center;
 
     .madlibsButton {
-      font-family: 'Open Sans', sans-serif;
+      font-family: "Open Sans", sans-serif;
       font-weight: 800;
       text-transform: uppercase;
       user-select: none;
@@ -94,7 +94,7 @@
       padding: 20px;
 
       .givenWord {
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         background-color: #ffc6cb;
         color: #a10a37;
         padding: 1px 5px;
@@ -116,7 +116,7 @@
         color: #fff;
         cursor: pointer;
         display: flex;
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         font-weight: 800;
         justify-content: space-around;
         padding: 2%;
@@ -147,7 +147,7 @@
         height: 2vh;
         background-color: #e5eaec;
         border-radius: 10px;
-        overflow: clip;
+        overflow: hidden;
 
         .madlibsProgress {
           height: 100%;
@@ -164,7 +164,6 @@
   }
 
   .madlibsInstructions {
-    
     @media screen and (max-width: 768px) {
       font-size: 0.8rem;
     }
@@ -174,7 +173,7 @@
     position: absolute;
     height: min(100%, 564px);
     background-image: linear-gradient(transparent 60%, #fff 93%);
-    overflow-y: clip;
+    overflow-y: hidden;
 
     img {
       position: relative;
@@ -194,11 +193,11 @@
       left: -25vw;
       margin-bottom: 20vh;
       height: 33%;
-      overflow: clip;
+      overflow: hidden;
     }
 
     @media screen and (min-width: 768px) {
-      top: 0; 
+      top: 0;
       left: -10%;
     }
   }
