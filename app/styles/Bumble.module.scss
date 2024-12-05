@@ -14,7 +14,7 @@
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  overflow: clip;
+  overflow: hidden;
 
   footer {
     position: absolute;
@@ -75,7 +75,7 @@
   .matchScreenContainer {
     width: 100%;
     height: 100%;
-    overflow: clip;
+    overflow: hidden;
     position: absolute;
     background-color: #ffd84d;
     background-image: radial-gradient(#ffeba3, #ffd84d);
@@ -144,7 +144,7 @@
             aspect-ratio: 1;
             width: 100%;
             height: auto;
-            overflow: clip;
+            overflow: hidden;
             border-radius: 8px;
             box-sizing: border-box;
             border: 10px solid #fff;
@@ -275,7 +275,7 @@
           border-radius: 8px;
           display: flex;
           flex-direction: column;
-          overflow: clip;
+          overflow: hidden;
           box-shadow: 0px 8px 8px #00000033;
           background-image: linear-gradient(125deg, transparent, #ccb10014);
 
@@ -299,7 +299,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: clip;
+            overflow: hidden;
 
             .messageContainerHeaderBack {
               position: absolute;
@@ -320,7 +320,7 @@
           .messageContainerBody {
             height: 87.5%;
             overflow-y: scroll;
-            overflow-x: clip;
+            overflow-x: hidden;
             font-size: max(1vw, 1em);
 
             .matchDmContainer {
@@ -345,7 +345,7 @@
                     aspect-ratio: 1;
                     width: min(12%, 50px);
                     height: max(12%, 50px);
-                    overflow: clip;
+                    overflow: hidden;
                     border-radius: 50%;
                     box-shadow: 0px 2px 2px #00000033;
                     flex-shrink: 0;
@@ -441,7 +441,7 @@
                 gap: 4%;
                 width: 100%;
                 height: 20%;
-                overflow: clip;
+                overflow: hidden;
                 cursor: pointer;
 
                 &:nth-child(even) {
@@ -450,7 +450,7 @@
 
                 .matchItemIcon {
                   position: relative;
-                  overflow: clip;
+                  overflow: hidden;
                   border-radius: 50%;
                   aspect-ratio: 1;
                   flex-basis: 20%;
@@ -516,9 +516,9 @@
 
         .rinneSpriteContainer {
           position: relative;
-          overflow: clip;
-          overflow-x: clip;
-          overflow-y: clip;
+          overflow: hidden;
+          overflow-x: hidden;
+          overflow-y: hidden;
           aspect-ratio: 1;
           width: min(10vw, 100px);
           height: min(10vw, 100px);
@@ -756,7 +756,7 @@
               position: relative;
               aspect-ratio: 1;
               height: 100%;
-              overflow: clip;
+              overflow: hidden;
               box-shadow: 0px 2px 2px #00000011;
               box-sizing: border-box;
               border-radius: 50%;
@@ -820,7 +820,7 @@
                   flex-direction: column;
                   align-items: flex-start;
                   justify-content: flex-end;
-                  overflow: clip;
+                  overflow: hidden;
                   user-select: none;
                   pointer-events: none;
 
@@ -865,7 +865,7 @@
 
                 &.cardBack {
                   background-color: #232c3f;
-                  overflow: clip;
+                  overflow: hidden;
                   transform: rotateY(180deg);
                   box-shadow: inset 0px 4px 4px #00000033;
 

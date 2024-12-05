@@ -158,7 +158,7 @@
 
       .nachumeContainer {
         border-radius: 50%;
-        overflow: clip;
+        overflow: hidden;
         text-align: center;
         border: 0.5em solid #716edb;
         box-shadow: 0.25em 0.25em 0px #e0536f;
@@ -247,7 +247,7 @@
   }
 
   .quizContainer {
-    overflow-x: clip;
+    overflow-x: hidden;
 
     .progressContainer {
       display: flex;
@@ -263,7 +263,7 @@
         border-radius: 50px;
         box-shadow: inset 0px 0.25em 0px #bcbbf0;
         background-color: #d8d7f7;
-        overflow: clip;
+        overflow: hidden;
       }
 
       .currentProgress {
