@@ -186,10 +186,11 @@ body {
             align-items: center;
             margin: 0.5em 0vw;
             background-color: #7886ed33;
-            color: #7886ed;
+            color: #5d6de3;
             border-radius: 50px;
             padding: 0.5em;
             box-shadow: 0px 2px 2px #00000008;
+            font-weight: 600;
 
             .contentPillIcon {
               aspect-ratio: 1;
@@ -199,11 +200,35 @@ body {
               align-items: center;
               justify-content: center;
               border-radius: 50%;
-              color: #7886ed;
+              color: #5d6de3;
             }
 
             .contentPillText {
               margin-left: 5%;
+            }
+          }
+        }
+
+        .contentAboutMore {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 2% 0% 8% 0%;
+          font-size: 1.1em;
+
+          .moreWord {
+            display: flex;
+            align-items: center;
+
+            &:not(:last-child)::after {
+              content: "";
+              display: block;
+              aspect-ratio: 1;
+              width: 0.3em;
+              height: auto;
+              background-color: #7aafff;
+              border-radius: 50%;
+              margin: 0% 1vw;
             }
           }
         }
@@ -220,7 +245,7 @@ body {
         a:link,
         a:visited,
         a:active {
-          color: #7080e6dd;
+          color: #4c5fd9;
         }
 
         .carrdFooterPill {

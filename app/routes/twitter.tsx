@@ -53,7 +53,7 @@ function SectionContent({
           <ul>
             <li>
               <strong>other favorite characters</strong> rinne, mayoi, tomoya,
-              tetora, makoto
+              tetora, kohaku, makoto
             </li>
             <li>
               <strong>favorite ships</strong> <em>rinniki</em> (switch=OK!),
@@ -119,9 +119,9 @@ function SectionContent({
               you
             </li>
             <li>
-              i am uncomfortable with incest and loli/shotacons, i don't
-              identify as an anti and i will never harass anyone over this, but
-              i will exercise my right to block and move on
+              i am uncomfortable with incest and loli/shotacons. i will never
+              harass anyone over this, but i will exercise my right to block and
+              move on
             </li>
             <li>
               i will block/mute you if you attack people for sharing their
@@ -153,8 +153,13 @@ function SectionContent({
               />
               <ContentPill icon={<IconCircleCheck />} text="she/he" />
             </div>
+            <div className={styles.contentAboutMore}>
+              <div className={styles.moreWord}>black</div>
+              <div className={styles.moreWord}>queer</div>
+              <div className={styles.moreWord}>infj</div>
+              <div className={styles.moreWord}>3w4</div>
+            </div>
             <ul>
-              <li>black and queer</li>
               <li>coder by day, world's worst nikiP by night</li>
               <li>
                 ENGstars player since <strong>june 2022</strong>
@@ -192,8 +197,9 @@ export default function Twitter() {
   console.log({ hash });
 
   const [selectedSection, setSelectedSection] = useState<Section>(
-    hash.length === 0 ? hash : "#about",
+    hash.length > 0 ? hash : "#about",
   );
+
   const sectionName = hash.slice(1);
 
   useEffect(() => {
