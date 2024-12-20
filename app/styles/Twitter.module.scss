@@ -25,7 +25,6 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
-  font-size: clamp(14px, 1vw, 18px);
   color: #3c34ad;
 
   h1,
@@ -39,7 +38,8 @@ body {
   }
 
   .carrdContainer {
-    width: min(100%, 810px);
+    width: min(100vw, 810px);
+    font-size: min(4vw, 18px);
     margin: 4vh auto 0vh auto;
     padding: 2%;
     box-sizing: border-box;
