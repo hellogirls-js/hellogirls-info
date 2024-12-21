@@ -12,6 +12,8 @@ import {
 } from "@tabler/icons-react";
 import { computeAge } from "@/utilities";
 import clsx from "clsx";
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { usePrevious } from "@mantine/hooks";
 
 export function loader({ context }: LoaderFunctionArgs) {
   return json({ birthday: context.cloudflare.env.BIRTHDAY });
@@ -144,29 +146,27 @@ function SectionContent({
     default:
       return (
         <>
-          <p>
-            <div className={styles.contentAboutBasics}>
-              <ContentPill icon={<IconSignature />} text="son" />
-              <ContentPill
-                icon={<IconZodiacAries />}
-                text={`${computeAge(birthday)} years old`}
-              />
-              <ContentPill icon={<IconCircleCheck />} text="she/he" />
-            </div>
-            <div className={styles.contentAboutMore}>
-              <div className={styles.moreWord}>black</div>
-              <div className={styles.moreWord}>queer</div>
-              <div className={styles.moreWord}>infj</div>
-              <div className={styles.moreWord}>3w4</div>
-            </div>
-            <ul>
-              <li>coder by day, world's worst nikiP by night</li>
-              <li>
-                ENGstars player since <strong>june 2022</strong>
-              </li>
-              <li>transit enthusiast</li>
-            </ul>
-          </p>
+          <div className={styles.contentAboutBasics}>
+            <ContentPill icon={<IconSignature />} text="son" />
+            <ContentPill
+              icon={<IconZodiacAries />}
+              text={`${computeAge(birthday)} years old`}
+            />
+            <ContentPill icon={<IconCircleCheck />} text="she/he" />
+          </div>
+          <div className={styles.contentAboutMore}>
+            <div className={styles.moreWord}>black</div>
+            <div className={styles.moreWord}>queer</div>
+            <div className={styles.moreWord}>infj</div>
+            <div className={styles.moreWord}>3w4</div>
+          </div>
+          <ul>
+            <li>coder by day, world's worst nikiP by night</li>
+            <li>
+              ENGstars player since <strong>june 2022</strong>
+            </li>
+            <li>transit enthusiast</li>
+          </ul>
         </>
       );
   }
@@ -194,17 +194,29 @@ export default function Twitter() {
   const birthdayRef = useRef(env.birthday as string);
   const { hash } = useLocation();
   const navigate = useNavigate();
-  console.log({ hash });
+  const [direction, setDirection] = useState(0);
 
   const [selectedSection, setSelectedSection] = useState<Section>(
     hash.length > 0 ? hash : "#about",
   );
+  const previousHash = usePrevious(hash);
+
+  useEffect(() => {
+    if (sections.indexOf(hash) >= 0) setSelectedSection(hash);
+  }, [hash]);
 
   const sectionName = hash.slice(1);
 
   useEffect(() => {
     if (sections.indexOf(hash) < 0) setSelectedSection("#about");
     navigate({ hash: selectedSection });
+    if (previousHash) {
+      if (sections.indexOf(hash) < sections.indexOf(previousHash)) {
+        setDirection(1);
+      } else {
+        setDirection(-1);
+      }
+    }
   }, [selectedSection]);
 
   const sectionIndex = sections.indexOf(selectedSection);
@@ -221,6 +233,7 @@ export default function Twitter() {
             <div className={styles.carrdContentTabs}>
               {sections.map((section) => (
                 <button
+                  key={section}
                   className={clsx(
                     styles.carrdContentTabButton,
                     selectedSection === section && styles.selected,
