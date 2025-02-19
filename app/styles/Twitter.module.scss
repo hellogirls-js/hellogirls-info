@@ -27,6 +27,40 @@ body {
   position: relative;
   color: #3c34ad;
 
+  .tooltipContainer {
+    position: relative;
+    text-decoration: underline #d85b91 dotted 0.15rem;
+    cursor: default;
+    overflow: visible;
+
+    .tooltip {
+      max-width: max(20vw, 200px);
+      min-width: max(10vw, 100px);
+      width: auto;
+      text-decoration: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-top: 1.25rem;
+      background-color: #000000aa;
+      color: white;
+      padding: 8px;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      transition: opacity 0.2s;
+
+      &.showTooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &.hideTooltip {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+  }
+
   h1,
   h2,
   h3,
@@ -235,43 +269,55 @@ body {
       }
 
       .carrdFooter {
-        width: 75%;
-        margin: auto;
-        margin-top: 6vh;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        grid-gap: 1rem;
+        margin-top: 4vh;
 
-        a:link,
-        a:visited,
-        a:active {
-          color: #4c5fd9;
+        .carrdFooterUpdateDate {
+          width: 75%;
+          margin: auto;
+          font-size: 0.9rem;
+          text-align: center;
+          margin-top: 2vh;
+          opacity: 0.75;
         }
 
-        .carrdFooterPill {
-          display: flex;
-          align-items: center;
-          background-color: #92a1f043;
-          border-radius: 50px;
-          padding: 0.25em 0.5em 0.25em 0.25em;
-          margin: 0% 2%;
-          font-size: 0.9em;
+        .carrdFooterGrid {
+          width: 75%;
+          margin: auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          grid-gap: 1rem;
 
-          .carrdFooterPillIcon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            aspect-ratio: 1;
-            width: 28px;
-            height: auto;
-            padding: 2%;
-            background-color: #92a1f065;
-            border-radius: 50%;
-            color: #ffffffaa;
+          a:link,
+          a:visited,
+          a:active {
+            color: #4c5fd9;
           }
 
-          .carrdFooterPillText {
-            margin-left: 5%;
+          .carrdFooterPill {
+            display: flex;
+            align-items: center;
+            background-color: #92a1f043;
+            border-radius: 50px;
+            padding: 0.25em 0.5em 0.25em 0.25em;
+            margin: 0% 2%;
+            font-size: 0.9em;
+
+            .carrdFooterPillIcon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              aspect-ratio: 1;
+              width: 28px;
+              height: auto;
+              padding: 2%;
+              background-color: #92a1f065;
+              border-radius: 50%;
+              color: #ffffffaa;
+            }
+
+            .carrdFooterPillText {
+              margin-left: 5%;
+            }
           }
         }
       }

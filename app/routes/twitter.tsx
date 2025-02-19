@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
 import styles from "@/styles/Twitter.module.scss";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 import {
   IconAt,
   IconBrandTwitter,
@@ -12,15 +12,50 @@ import {
 } from "@tabler/icons-react";
 import { computeAge } from "@/utilities";
 import clsx from "clsx";
-import { AnimatePresence, motion, Variants } from "framer-motion";
 import { usePrevious } from "@mantine/hooks";
+import dayjs from "dayjs";
 
-export function loader({ context }: LoaderFunctionArgs) {
-  return json({ birthday: context.cloudflare.env.BIRTHDAY });
+export async function loader({ context }: LoaderFunctionArgs) {
+  const latestCommitResponse = await fetch(
+    "https://api.github.com/repos/hellogirls-js/hellogirls-info/commits?per_page=1&path=app/routes/twitter.tsx",
+  );
+  const latestCommit: any[] = await latestCommitResponse.json();
+  return json({
+    birthday: context.cloudflare.env.BIRTHDAY,
+    latestCommitDate: latestCommit[0].commit.author.date,
+  });
 }
 
 const sections = ["#about", "#faves", "#rules"];
 type Section = (typeof sections)[number];
+
+function Tooltip({
+  children,
+  tooltipText,
+}: {
+  children: ReactElement | string;
+  tooltipText: string;
+}) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <span
+      className={styles.tooltipContainer}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      {children}{" "}
+      <div
+        className={clsx(
+          styles.tooltip,
+          showTooltip ? styles.showTooltip : styles.hideTooltip,
+        )}
+      >
+        {tooltipText}
+      </div>
+    </span>
+  );
+}
 
 function ContentPill({ icon, text }: { icon: ReactNode; text: string }) {
   return (
@@ -63,16 +98,18 @@ function SectionContent({
             </li>
           </ul>
           <p style={{ fontSize: "0.9rem" }}>
-            <strong>note!</strong> rinniki is my favorite ship in enstars and i
-            pretty much monoship rinne with niki (with one exception)! however,
-            i don't monoship niki with anyone and i dabble in other niki ships
-            here and there. these ships include nikihime, kuroniki, nazuniki,
-            yuzuniki, and natsuniki.
+            <strong>note!</strong> rinniki is my favorite ship in enstars and{" "}
+            <Tooltip tooltipText="the only other rinne ship i like is rinnehiyo/hikari dorm shipping">
+              i monoship rinne with niki
+            </Tooltip>
+            . however, i don't monoship niki with anyone and i dabble in other
+            niki ships here and there. these ships include nikihime, kuroniki,
+            nazuniki, yuzuniki, and natsuniki.
           </p>
           <ul>
             <li>
-              <strong>other things i like:</strong> pokemon, animal crossing,
-              cookie clicker, sanrio, webtoons
+              <strong>other things i like</strong> pokemon, animal crossing,
+              infinity nikki, cookie clicker, sanrio, webtoons
             </li>
           </ul>
         </>
@@ -84,8 +121,8 @@ function SectionContent({
           <ul>
             <li>
               i softblock to break mutuals <strong>very</strong> liberally, it's
-              usually to curate my space and is almost never personal (i don't
-              like muting mutuals it feels rude)
+              usually to curate my space and is almost never personal + i'm okay
+              with refollowing
             </li>
             <li>
               that being said, i'd appreciate if mutuals could softblock to
@@ -121,6 +158,10 @@ function SectionContent({
               you
             </li>
             <li>
+              <strong>i really don't like rinhime</strong> and i mute/block
+              people who ship it. i'm fine with rinnikihime tho
+            </li>
+            <li>
               i am uncomfortable with incest and loli/shotacons. i will never
               harass anyone over this, but i will exercise my right to block and
               move on
@@ -129,12 +170,7 @@ function SectionContent({
               i will block/mute you if you attack people for sharing their
               harmless opinions
             </li>
-            <li>
-              <strong>
-                rinhime is a strong notp of mine and i do anything i can to
-                avoid it.
-              </strong>
-            </li>
+
             <li>
               <strong>
                 Involve me in discourse and it will be the last thing you do.
@@ -156,14 +192,19 @@ function SectionContent({
           </div>
           <div className={styles.contentAboutMore}>
             <div className={styles.moreWord}>black</div>
-            <div className={styles.moreWord}>queer</div>
+            <div className={styles.moreWord}>
+              <Tooltip tooltipText="i'm so DEI you wouldn't even get it">
+                queer
+              </Tooltip>
+            </div>
             <div className={styles.moreWord}>infj</div>
             <div className={styles.moreWord}>3w4</div>
           </div>
           <ul>
             <li>coder by day, world's worst nikiP by night</li>
             <li>
-              ENGstars player since <strong>june 2022</strong>
+              ENGstars player since <strong>june 2022</strong>{" "}
+              <em>(on hiatus)</em>
             </li>
             <li>transit enthusiast</li>
           </ul>
@@ -195,6 +236,8 @@ export default function Twitter() {
   const { hash } = useLocation();
   const navigate = useNavigate();
   const [direction, setDirection] = useState(0);
+
+  const lastUpdatedDate = dayjs(env.latestCommitDate);
 
   const [selectedSection, setSelectedSection] = useState<Section>(
     hash.length > 0 ? hash : "#about",
@@ -264,21 +307,31 @@ export default function Twitter() {
             />
           </section>
           <footer className={styles.carrdFooter}>
-            <FooterPill
-              icon={<IconBrandTwitter />}
-              text="HELLOGlRLS"
-              url="https://twitter.com/helloglrls"
-            />
-            <FooterPill
-              icon={<IconCode />}
-              text="hellogirls_DEV"
-              url="https://twitter.com/hellogirls_DEV"
-            />
-            <FooterPill
-              icon={<IconAt />}
-              text="niki"
-              url="https://stars.ensemble.moe/@niki"
-            />
+            <div className={styles.carrdFooterGrid}>
+              <FooterPill
+                icon={<IconBrandTwitter />}
+                text="HELLOGlRLS"
+                url="https://twitter.com/helloglrls"
+              />
+              <FooterPill
+                icon={<IconCode />}
+                text="hellogirls_DEV"
+                url="https://twitter.com/hellogirls_DEV"
+              />
+              <FooterPill
+                icon={<IconAt />}
+                text="niki"
+                url="https://stars.ensemble.moe/@niki"
+              />
+            </div>
+            {env.latestCommitDate && (
+              <div className={styles.carrdFooterUpdateDate}>
+                last updated{" "}
+                {lastUpdatedDate
+                  .format("MMMM D, YYYY [at] h:MMa")
+                  .toLowerCase()}
+              </div>
+            )}
           </footer>
         </div>
       </main>
