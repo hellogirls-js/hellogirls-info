@@ -16,14 +16,21 @@ import { usePrevious } from "@mantine/hooks";
 import dayjs from "dayjs";
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  const latestCommitResponse = await fetch(
-    "https://api.github.com/repos/hellogirls-js/hellogirls-info/commits?per_page=1&path=app/routes/twitter.tsx",
-  );
-  const latestCommit: any[] = await latestCommitResponse.json();
-  return json({
-    birthday: context.cloudflare.env.BIRTHDAY,
-    latestCommitDate: latestCommit[0].commit.author.date,
-  });
+  try {
+    const latestCommitResponse = await fetch(
+      "https://api.github.com/repos/hellogirls-js/hellogirls-info/commits?per_page=1&path=app/routes/twitter.tsx",
+    );
+    const latestCommit: any[] = await latestCommitResponse.json();
+    return json({
+      birthday: context.cloudflare.env.BIRTHDAY,
+      latestCommitDate: latestCommit[0].commit.author.date,
+    });
+  } catch {
+    return json({
+      birthday: context.cloudflare.env.BIRTHDAY,
+      latestCommitDate: undefined,
+    });
+  }
 }
 
 const sections = ["#about", "#faves", "#rules"];
@@ -237,7 +244,9 @@ export default function Twitter() {
   const navigate = useNavigate();
   const [direction, setDirection] = useState(0);
 
-  const lastUpdatedDate = dayjs(env.latestCommitDate);
+  const lastUpdatedDate = env.latestCommitDate
+    ? dayjs(env.latestCommitDate)
+    : undefined;
 
   const [selectedSection, setSelectedSection] = useState<Section>(
     hash.length > 0 ? hash : "#about",
@@ -324,7 +333,7 @@ export default function Twitter() {
                 url="https://stars.ensemble.moe/@niki"
               />
             </div>
-            {env.latestCommitDate && (
+            {lastUpdatedDate && (
               <div className={styles.carrdFooterUpdateDate}>
                 last updated{" "}
                 {lastUpdatedDate
