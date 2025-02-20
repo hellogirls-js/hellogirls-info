@@ -20,7 +20,6 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  console.log("birthday: ", context.cloudflare.env.BIRTHDAY);
   return json({ BIRTHDAY: context.cloudflare.env.BIRTHDAY });
 }
 

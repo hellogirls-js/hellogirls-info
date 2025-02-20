@@ -14,23 +14,12 @@ import { computeAge } from "@/utilities";
 import clsx from "clsx";
 import { usePrevious } from "@mantine/hooks";
 import dayjs from "dayjs";
+import { useQuery } from "@tanstack/react-query";
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  try {
-    const latestCommitResponse = await fetch(
-      "https://api.github.com/repos/hellogirls-js/hellogirls-info/commits?per_page=1&path=app/routes/twitter.tsx",
-    );
-    const latestCommit: any[] = await latestCommitResponse.json();
-    return json({
-      birthday: context.cloudflare.env.BIRTHDAY,
-      latestCommitDate: latestCommit[0].commit.author.date,
-    });
-  } catch {
-    return json({
-      birthday: context.cloudflare.env.BIRTHDAY,
-      latestCommitDate: undefined,
-    });
-  }
+  return json({
+    birthday: context.cloudflare.env.BIRTHDAY,
+  });
 }
 
 const sections = ["#about", "#faves", "#rules"];
@@ -166,7 +155,7 @@ function SectionContent({
             </li>
             <li>
               <strong>i really don't like rinhime</strong> and i mute/block
-              people who ship it. i'm fine with rinnikihime tho
+              people who ship it. poly rinnikihime is fine for me tho
             </li>
             <li>
               i am uncomfortable with incest and loli/shotacons. i will never
@@ -244,8 +233,19 @@ export default function Twitter() {
   const navigate = useNavigate();
   const [direction, setDirection] = useState(0);
 
-  const lastUpdatedDate = env.latestCommitDate
-    ? dayjs(env.latestCommitDate)
+  const { data: latestCommitDate, isPending: isCommitDatePending } = useQuery({
+    queryKey: ["github", "latest commit date"],
+    queryFn: async () => {
+      const latestCommitResponse = await fetch(
+        "https://api.github.com/repos/hellogirls-js/hellogirls-info/commits?per_page=1&path=app/routes/twitter.tsx",
+      );
+      const latestCommit: any[] = await latestCommitResponse.json();
+      return latestCommit[0].commit.author.date;
+    },
+  });
+
+  const lastUpdatedDate = latestCommitDate
+    ? dayjs(latestCommitDate)
     : undefined;
 
   const [selectedSection, setSelectedSection] = useState<Section>(
@@ -272,6 +272,21 @@ export default function Twitter() {
   }, [selectedSection]);
 
   const sectionIndex = sections.indexOf(selectedSection);
+
+  if (isCommitDatePending)
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
 
   return (
     <div className={styles.carrdPage}>
@@ -333,14 +348,13 @@ export default function Twitter() {
                 url="https://stars.ensemble.moe/@niki"
               />
             </div>
-            {lastUpdatedDate && (
-              <div className={styles.carrdFooterUpdateDate}>
-                last updated{" "}
-                {lastUpdatedDate
+
+            <div className={styles.carrdFooterUpdateDate}>
+              {lastUpdatedDate &&
+                `last updated ${lastUpdatedDate
                   .format("MMMM D, YYYY [at] h:MMa")
-                  .toLowerCase()}
-              </div>
-            )}
+                  .toLowerCase()}`}
+            </div>
           </footer>
         </div>
       </main>
