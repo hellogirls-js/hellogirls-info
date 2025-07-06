@@ -3,10 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import AppRouter from "./routes";
 
-import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/merriweather';
 import "@fontsource-variable/dm-sans";
 
-import "./globals.scss"
+import "@/styles/global.scss"
 
 const queryClient = new QueryClient();
 

@@ -1,4 +1,4 @@
-@use "./styles/vars.module.scss";
+@use "vars.module.scss";
 
 html, body {
   margin: 0;
@@ -20,6 +20,8 @@ html, body {
 
   h1 {
     font-family: vars.$header-font;
+    font-weight: 400;
+    font-style: italic;
     margin: 0;
     margin-bottom: 4vh;
   }
