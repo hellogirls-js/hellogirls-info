@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../styles.module.scss";
-import { motion, useScroll, useTransform, useVelocity } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useViewportSize } from "@mantine/hooks";
 import dayjs from "dayjs";
 import {
@@ -10,7 +10,7 @@ import {
   IconZodiacAries,
 } from "@tabler/icons-react";
 
-const BORDER_COLORS = ["#f589d6", "#a6c240", "#6eadf5", "#dd74f2"];
+const BORDER_COLORS = ["#ffe6f8", "#f3ffc7", "#cce4ff", "#f7d1ff"];
 
 function AboutCard({
   index,
@@ -25,8 +25,8 @@ function AboutCard({
   const cardYPosition = useTransform(
     scrollY,
     [
-      viewportHeight * (index + 1) + viewportHeight / 10,
-      viewportHeight * (index + 2),
+      viewportHeight * (index + 1) + viewportHeight / 20,
+      viewportHeight * (index + 2) - viewportHeight / 20,
     ],
     [900, 0],
   );
@@ -38,12 +38,21 @@ function AboutCard({
     }
   });
 
+  const shouldBeGreen = index === 1 || index === 2;
+
+  const DARK_GREEN_BG = "#829953";
+  const DARK_GREEN_TEXT = "#e9f5b5";
+
+  const DARK_BROWN_BG = "#cc7e64";
+  const DARK_BROWN_TEXT = "#f5d9b5";
+
   return (
     <motion.div
       className={styles.aboutCard}
       style={{
         y: cardYPosition,
         visibility: cardVisibility,
+        backgroundColor: shouldBeGreen ? DARK_GREEN_BG : DARK_BROWN_BG,
       }}
     >
       <motion.div
@@ -53,8 +62,13 @@ function AboutCard({
       >
         {section.icon}
       </motion.div>
-      <div className={styles.aboutCardContent}>
-        <div className={styles.aboutCardTitle}>{section.title}</div>
+      <div className={styles.aboutCardContent} style={{ color: "#fff" }}>
+        <div
+          className={styles.aboutCardTitle}
+          style={{ color: shouldBeGreen ? DARK_GREEN_TEXT : DARK_BROWN_TEXT }}
+        >
+          {section.title}
+        </div>
         <div className={styles.aboutCardValue}>{section.value}</div>
       </div>
     </motion.div>
@@ -69,7 +83,29 @@ export default function About() {
   const headingVisibility = useTransform(
     scrollY,
     [viewportHeight, viewportHeight + viewportHeight / 10],
-    ["0px", "55px"],
+    ["0px", "80px"],
+  );
+
+  const headingUnderlineVisibility = useTransform(
+    scrollY,
+    [
+      0,
+      viewportHeight + viewportHeight / 10,
+      viewportHeight + viewportHeight / 10 + 150,
+    ],
+    ["0%", "0%", "100%"],
+  );
+
+  const aboutCardsVisibility = useTransform(
+    scrollY,
+    [0, viewportHeight, viewportHeight * 7],
+    ["none", "grid", "none"],
+  );
+
+  const aboutContainerVisibility = useTransform(
+    scrollY,
+    [0, viewportHeight - 50, viewportHeight * 7],
+    ["absolute", "fixed", "absolute"],
   );
 
   const ABOUT_SECTIONS: Array<{
@@ -114,7 +150,11 @@ export default function About() {
 
   return (
     <motion.section className={styles.aboutScrollContainer}>
-      <motion.div layout className={styles.aboutContainer}>
+      <motion.div
+        layout
+        className={styles.aboutContainer}
+        style={{ position: aboutContainerVisibility }}
+      >
         <motion.div
           layout
           className={styles.aboutHeadingContainer}
@@ -123,12 +163,19 @@ export default function About() {
           <motion.h2 layout className={styles.aboutHeading}>
             Who am I?
           </motion.h2>
+          <motion.div
+            className={styles.aboutHeadingUnderline}
+            style={{ scaleX: headingUnderlineVisibility }}
+          />
         </motion.div>
-        <div className={styles.aboutCardsContainer}>
+        <motion.div
+          className={styles.aboutCardsContainer}
+          style={{ display: aboutCardsVisibility }}
+        >
           {ABOUT_SECTIONS.map((section, index) => {
             return <AboutCard key={section.title} {...{ index, section }} />;
           })}
-        </div>
+        </motion.div>
         <motion.div layout></motion.div>
       </motion.div>
     </motion.section>
