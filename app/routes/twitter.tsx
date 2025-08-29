@@ -76,36 +76,25 @@ function SectionContent({
           <img
             src="https://static.wikia.nocookie.net/ensemble-stars/images/4/4c/ES2_Third_Anniversary_Set_2_Niki.png"
             alt="my love"
+            width={200} height="auto"
           />
           <p>
             <strong>niki shiina</strong> is currently my biggest comfort
             character and i love him so much!! i lovemail him{" "}
             <strong>a lot</strong> so heed with caution. if you also love him
-            then we are automatically best friends, i don't make the rules here!
+            then we are automatically best friends, i don&apos;t make the rules here!
           </p>
           <ul>
-            <li>
-              <strong>other favorite characters</strong> rinne, mayoi, tomoya,
-              tetora, kohaku, makoto
-            </li>
-            <li>
-              <strong>favorite ships</strong> <em>rinniki</em> (switch=OK!),
-              kohaai, hiiteto
-            </li>
+            <li><strong>other favorites: </strong>rinne, mayoi, tomoya, kohaku, tetora, makoto</li>
+            <li><strong>favorite enstars ships:</strong> <em>rinniki (switch=OK)</em>, kohaai, hikari dorm, hiiteto</li>
           </ul>
-          <p style={{ fontSize: "0.9rem" }}>
-            <strong>note!</strong> rinniki is my favorite ship in enstars and{" "}
-            <Tooltip tooltipText="the only other rinne ship i like is rinnehiyo/hikari dorm shipping">
-              i monoship rinne with niki
-            </Tooltip>
-            . however, i don't monoship niki with anyone and i dabble in other
-            niki ships here and there. these ships include nikihime, kuroniki,
-            nazuniki, yuzuniki, and natsuniki.
-          </p>
+          <img src="https://umamusu.wiki/w/images/b/b4/100042.png" alt="my dotter" width={200} height="auto" />
+          <p>i also started playing uma musume recently and i ADORE <strong>matikanefukukitaru</strong>!! she is my fortune&apos;s smile ^u^ and i will always hype her up!<br />
+          <strong>other umas i like: </strong>vodka, daitaku helios, narita brian, BNW</p>
           <ul>
             <li>
-              <strong>other things i like</strong> pokemon, animal crossing,
-              infinity nikki, cookie clicker, sanrio, webtoons
+              <strong>other things i like</strong> tetro danganronpa, pokemon, animal crossing,
+              cookie clicker, sanrio, webtoons
             </li>
           </ul>
         </>
@@ -116,28 +105,28 @@ function SectionContent({
           <h3>before you follow...</h3>
           <ul>
             <li>
-              i softblock to break mutuals <strong>very</strong> liberally, it's
-              usually to curate my space and is almost never personal + i'm okay
+              i softblock to break mutuals <strong>very</strong> liberally, it&apos;s
+              usually to curate my space and is almost never personal + i&apos;m okay
               with refollowing
             </li>
             <li>
-              that being said, i'd appreciate if mutuals could softblock to
+              that being said, i&apos;d appreciate if mutuals could softblock to
               break the mutual
             </li>
             <li>
               i swear <strong>A LOT</strong>
             </li>
             <li>
-              notifs are on for followers only and even then twitter doesn't
+              notifs are on for followers only and even then twitter doesn&apos;t
               show me every notif. most functional website
             </li>
             <li>
-              i'm very shy and am afraid of people on twitter so i don't reply
-              to most replies (even my own friends...) but i'll always like
+              i&apos;m very shy and am afraid of people on twitter so i don't reply
+              to most replies (even my own friends...) but i&apos;ll always like
               replies i see ^.^
             </li>
             <li>
-              <strong>i do not offer coding help!!</strong> i don't have time
+              <strong>i do not offer coding help!!</strong> i don&apos;t have time
               T__T
             </li>
           </ul>
@@ -145,7 +134,7 @@ function SectionContent({
           <ul>
             <li>
               <strong>
-                do not interact if you think racism/colorism isn't a big deal,
+                do not interact if you think racism/colorism isn&apos;t a big deal,
                 undermine/harass those who call out racism either in enstars or
                 the fandom, or prioritize the feelings of fictional characters
                 over real poc.
@@ -154,7 +143,7 @@ function SectionContent({
               you
             </li>
             <li>
-              <strong>i really don't like rinhime</strong> and i mute/block
+              <strong>i really don&apos;t like rinhime</strong> and i mute/block
               people who ship it. poly rinnikihime is fine for me tho
             </li>
             <li>
@@ -197,10 +186,9 @@ function SectionContent({
             <div className={styles.moreWord}>3w4</div>
           </div>
           <ul>
-            <li>coder by day, world's worst nikiP by night</li>
+            <li>coder by day, world&apos;s worst nikiP by night</li>
             <li>
-              ENGstars player since <strong>june 2022</strong>{" "}
-              <em>(on hiatus)</em>
+              novice cosplayer
             </li>
             <li>transit enthusiast</li>
           </ul>
@@ -219,7 +207,7 @@ function FooterPill({
   url: string;
 }) {
   return (
-    <a href={url} target="_blank" className={styles.carrdFooterPill}>
+    <a href={url} target="_blank" rel="noreferrer" className={styles.carrdFooterPill}>
       <div className={styles.carrdFooterPillIcon}>{icon}</div>
       <div className={styles.carrdFooterPillText}>{text}</div>
     </a>

@@ -42,7 +42,6 @@
     "react-spinners": "^0.14.1",
     "recharts": "^2.13.3",
     "sass": "^1.80.5",
-    "typeit-react": "^2.7.7",
     "use-image": "^1.1.1"
   },
   "devDependencies": {

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import TypeIt from "typeit-react";
 
 import styles from "@/styles/MainLayout.module.scss";
 
@@ -13,18 +12,7 @@ export default function Header({ heading }: { heading: string }) {
     <header className={`${styles.header} ${styles[colorTheme]}`}>
       <h1 className={styles.headerText}>
         <Link to="/" className={styles.headerLink}>
-          <TypeIt
-            options={{ speed: 100 }}
-            getBeforeInit={(instance) => {
-              instance
-                .type(heading)
-                .pause(5000)
-                .delete(heading.length)
-                .type("https://hellogirls.info");
-
-              return instance;
-            }}
-          />
+          https://hellogirls.info
         </Link>
       </h1>
     </header>
