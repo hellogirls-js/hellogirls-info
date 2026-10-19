@@ -144,6 +144,17 @@ function FinalImageItem({
 
 	const unitColor = Color(unit.image_color);
 
+	// grow the label upwards to fit long unit names that wrap
+	const labelText = unit.name.toUpperCase();
+	const labelLines = new Konva.Text({
+		text: labelText,
+		width: 170,
+		fontSize: 24,
+		fontFamily: "Raleway",
+	}).textArr.length;
+	const labelHeight = 24 * labelLines + 8;
+	const labelY = 280 - labelHeight;
+
 	return (
 		<Group key={index} {...{ x, y }}>
 			<Rect
@@ -182,20 +193,20 @@ function FinalImageItem({
 			/>
 			<Rect
 				width={180}
-				height={unit.id === 18 ? 56 : 32}
+				height={labelHeight}
 				fill="#5764f7"
 				x={450}
-				y={unit.id === 18 ? 224 : 248}
+				y={labelY}
 				cornerRadius={[0, 8, 0, 8]}
 			/>
 			<Text
-				width={180}
-				text={unit.name.toUpperCase()}
+				width={170}
+				text={labelText}
 				fill="white"
 				fontSize={24}
 				fontFamily="Raleway"
 				x={460}
-				y={unit.id === 18 ? 230 : 254}
+				y={labelY + 6}
 			/>
 		</Group>
 	);
@@ -533,8 +544,6 @@ export default function FavesPicker() {
 	);
 	const [openImageModal, setOpenImageModal] = useState(false);
 	const [showCharaPopup, setShowCharaPopup] = useState<number>();
-
-	console.log({ unitData });
 
 	const updatedUnitData = [...unitData].filter((unit) => unit.id !== 11);
 
